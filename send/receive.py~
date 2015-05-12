@@ -1,0 +1,38 @@
+from multiprocessing import Process, Queue, Lock
+import socket
+
+
+
+def receive(nQueue, nLock, host, port, maxinterval):
+    
+
+     ADDR = (host,port)
+     sock = socket.socket(socket.AF_INET ,socket.SOCK_DGRAM)
+     sock.bind(ADDR)
+     
+     maxinterval=45
+     
+     rQueue = nQueue
+     
+     rLock = nLock
+
+
+
+     while True:
+            try:
+               sock.settimeout(maxinterval)
+               d,a=self.sock.recvfrom(1024)
+
+               print "receiving data"
+               
+
+            except socket.timeout:
+                 
+               print "time out"
+               
+               rLock.acquire()
+               
+               rQueue.put('wrong')
+               
+               rLock.release()
+               
